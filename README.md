@@ -121,4 +121,20 @@ urlpatterns = [
 
 ### 3) pybo/question_list.html 수정!
 - 원인은 : 템플릿에서 아직 네임스페이스를 사용하고 있지 않기 때문이다.
-- `url 'detail' 을  url 'pybo:detail' 로 수정!`
+- `url 'detail' 을  url 'pybo:detail' 로 pybo 등록수정!`
+
+## 2-06 답변 등록 기능 만들기
+
+
+### 답변 저장하고 표시하기!
+### 1) 질문 상세 팀플릿 답변 등록 버튼 만들기!
+ - `{% csrf_token %}` 유효성 데이터 검증
+
+ ### 4) answer_create 함수 추가 > 여기가 어렵네! 
+```
+answer_create 함수의 question_id 매개변수에는 URL 매핑 정보값이 넘어온다. 예를 들어 /pybo/answer/create/2가 요청되면 question_id에는 2가 넘어온다. request 매개변수에는 pybo/question_detail.html에서 textarea에 입력된 데이터가 담겨 넘어온다. 이 값을 추출하기 위한 코드가 바로 request.POST.get('content')이다. 그리고 Question 모델을 통해 Answer 모델 데이터를 생성하기 위해 question.answer_set.create를 사용했다.
+
+- request.POST.get('content')는 POST 형식으로 전송된 form 데이터 항목 중 name이 content인 값을 의미한다.
+- Answer 모델이 Question 모델을 Foreign Key로 참조하고 있으므로 question.answer_set 같은 표현을 사용할 수 있다.
+```
+
