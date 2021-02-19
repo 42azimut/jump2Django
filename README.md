@@ -97,3 +97,28 @@ python manage.py sqlmigrate pybo 0001
 - pybo.admin.py 에서 질문 모델 등록하자
 `admin.site.register(Quesion)`
 
+## 2-04 질문 목록과 질문 상세 기능 구현하기
+### 2) 오류화면 구현하기!
+    - `get_object_or_404()` 
+
+### 3) 404 확인!
+
+## 2-05 URL 더 똑똑하게 사용하기
+### 1) URL 별칭 사용하기
+```
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('<int:question_id>/', views.detail, name='detail'),
+]
+```
+- 이렇게 수정하면 실제 주소 /pybo/는 index라는 URL 별칭이, /pybo/2/는 detail이라는 URL 별칭이 생긴다.
+
+### URL 네임 스페이스 사용하기
+- pybo/urls.py 에 app_name 변수에 네임스페이스를 저장하면 됨!
+- `app_name = 'pybo'`
+
+### 2) 네임 스페이스 테스트 하면 오류 발생됨!
+
+### 3) pybo/question_list.html 수정!
+- 원인은 : 템플릿에서 아직 네임스페이스를 사용하고 있지 않기 때문이다.
+- `url 'detail' 을  url 'pybo:detail' 로 수정!`
