@@ -138,3 +138,95 @@ answer_create 함수의 question_id 매개변수에는 URL 매핑 정보값이 �
 - Answer 모델이 Question 모델을 Foreign Key로 참조하고 있으므로 question.answer_set 같은 표현을 사용할 수 있다.
 ```
 
+## 2-07 스태틱 화면 예쁘게 꾸미기
+```
+STATIC_URL = '/static/'
+# ---------------------------------- [edit] ---------------------------------- #
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+```
+
+## 2-08 부트스트랩으로 더 쉽게 화면 꾸미기
+- 다운로드 및 파일 복사! 
+- 압축파일내 경로 : bootstrap-4.5.3-dist.zip\bootstrap-4.5.3-dist\css\bootstrap.min.css
+- 카피한 경로 : C:\projects\mysite\static\bootstrap.min.css
+
+### 2) 질문 목록 템플릿에 부트스트랩 적용
+```
+<!-- ------------------------------- [edit] -------------------------------- -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+<!-- ----------------------------------------------------------------------- -->
+{% if question_list %}
+(... 생략 ...)
+```
+
+## 2-09 표준 HTML과 템플릿 상속 사용해 보기
+### 1) base.html 템플릿 만들기!
+```
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>Hello, pybo!</title>
+</head>
+<body>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+{% block content %}
+{% endblock %}
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+</body>
+</html>
+```
+### 2) question_list.html 수정하기
+```
+{% extends 'base.html' %}
+{% block content %}
+<!-- ----------------------------------------------------------------------- -->
+<div class="container my-3">
+    <table class="table">
+        (... 생략 ...)
+    </table>
+</div>
+<!-- ------------------------------- [edit] -------------------------------- -->
+{% endblock %}
+```
+### 3) question_detail.html 수정하기
+```
+{% extends 'base.html' %}
+{% block content %}
+<!-- ----------------------------------------------------------------------- -->
+<div class="container my-3">
+    <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+    (... 생략 ...)
+    </form>
+</div>
+<!-- ------------------------------- [edit] -------------------------------- -->
+{% endblock %}
+```
+## 2-10 질문 등릭 기능 만들기
+### 1) 질문 등록 버튼
+`    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>`
+### 2) url 매핑 추가!
+`path('question/create/', views.question_create, name='question_create'),`
+
+### 3) pybo/views/py 
+-  QuestionForm 클래스는 질문을 등록하기 위해 사용하는 장고의 폼이다
+- {'form':form}은 템플릿에서 폼 엘리먼트를 생성할때 사용!
+```
+form .form import QuestionForm
+... 생략 ...
+def question_craete(request):
+    form = Question()
+    return render(request, 'pybo/question_form.html', {'form':form})
+```
+
+
