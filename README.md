@@ -229,4 +229,18 @@ def question_craete(request):
     return render(request, 'pybo/question_form.html', {'form':form})
 ```
 
+## 3-01 내비게이션 기능 추가
 
+## 3-02 게시판 페이징 기능 추가
+- 장고 쉘에서 모델(데이터) 질문 글 등록 300개 입력이 안됨!
+
+## 3-03 템플릿 필터 직접 만들기!
+
+## 3-04 질문에 답글 수 표시
+
+## 3-05 로그인, 로그아웃 기능 구현
+- 장고에서 기능 제공! django.contrib.auth 앱이 있다.
+- 이 앱은 장고 프로젝트 생성 시 mysite/config/settings.py에 자동으로 추가된다.
+### 1) common 앱 생성하기! 
+- 여러 앱들과 함께 사용할수 있도록 앱 단위로 로그인 구현이 아니고, 통용할수 있는 common 앱 만든다! 
+- (mysite) c:\projects\mysite>django-admin startapp common
