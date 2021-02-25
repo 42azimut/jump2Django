@@ -244,3 +244,18 @@ def question_craete(request):
 ### 1) common 앱 생성하기! 
 - 여러 앱들과 함께 사용할수 있도록 앱 단위로 로그인 구현이 아니고, 통용할수 있는 common 앱 만든다! 
 - (mysite) c:\projects\mysite>django-admin startapp common
+
+## 3-06
+### 3) UserForm은 django.contrib.auth.forms 패키지의 UserCreationForm 클래스를 상속하고 email 속성을 추가했다.
+- UserCreationForm 에는 다음 속성이 있다. username, password1, password2
+- 기본 위 속성에 email 속성을 추가 하기 위해 상속한 UserForm 클래스를 만든다!
+- 패스워드 검사는 is_valid 함수를 사용! 
+
+### 4) 회원가입을 위한 signup 함수 정의
+ ```
+signup 함수는 POST 요청인 경우 화면에서 입력한 데이터로 새로운 사용자를 생성하고, GET 요청인 경우 common/signup.html 화면을 반환한다. POST 요청에서 form.cleaned_data.get 함수는 회원가입 화면에서 입력한 값을 얻기 위해 사용하는 함수이다. 여기서는 로그인 시 필요한 아이디, 비밀번호를 얻기 위해 사용되었다. 그리고 회원가입이 완료된 이후에 자동으로 로그인되도록 authenticate 함수와 login 함수를 사용했다.
+ ```
+ -  authenicate, login 함수는 django.contrib.auth 패키지에 있는 함수로 사용자 인증과 로그인을 담당!
+
+ ### 5) 회원가입 템플릿 만들기
+ 
