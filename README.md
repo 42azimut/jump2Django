@@ -13,6 +13,18 @@ python3 -m venv mysite
 source ./mysite/bin/activate
 ```
 
+## 개발 환경 설정
+```
+#!/bin/bash
+
+cd /Users/...my root.../myproject
+export FLASK_APP=pybo
+export FLASK_ENV=development
+
+source /Users/...my root.../venv/myproject/bin/activate
+```
+
+
 ## - 기본앱 설정
 - 가상환경에서 장고 설치하기
     - `pip install django==3.1.3`
